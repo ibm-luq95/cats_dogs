@@ -1,0 +1,21 @@
+{% extends "frontend/base/master.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Add Pet {% endblock title %}
+
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset>
+      <legend><h3>New Pet</h3></legend>
+      {{ form|crispy }}
+    </fieldset>
+    <div>
+      <button type="submit" class='btn btn-primary' >Add</button>
+    </div>
+   
+  </form>
+
+
+{% endblock content %}

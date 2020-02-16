@@ -1,0 +1,40 @@
+{% extends "frontend/base/master.html" %}
+
+{% block title %} Dashboard {% endblock title %}
+
+{% block content %}
+
+
+<section>
+    <h3>Dashboard</h3> <span> <a class="btn btn-outline-primary" href="{% url 'dashboard-add-pet' %}">Add New Pet</a> </span>
+    <hr>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                
+                
+                {% for pet in pet_list%}
+                    <tr>
+                       
+                        <th scope="row">{{ pet.id }}</th>
+                        <td>{{ pet.name }}</td>
+                        <td>
+                            <a href="{% url 'dashboard-edit-pet' pet.id %}">Edit</a> | <a class="text-danger" href="{% url 'dashboard-delete-pet' pet.id %}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+             
+
+            </tbody>
+          </table>
+      </div>
+</section>
+
+{% endblock %}

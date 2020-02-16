@@ -1,0 +1,30 @@
+{% extends "frontend/base/master.html" %}
+{% load static %}
+
+{% block title %}
+    Pet Name here
+{% endblock title %}
+
+{% block content %}
+<br>
+<div class="row mt-5">
+    <div class="col">
+      <img src="{{object.avatar.url}}" alt="{{object.name}}" class="img-fluid" />
+    </div>
+    <div class="col">
+        <section class="mt-2">
+            <b>Type: </b> {% if object.typed == "D" %} Dog {% else %} Cat {% endif %}
+        </section>
+        <section class="mt-2">
+            <b>Name: </b> {{object.name}}
+        </section>
+        <section class="mt-2">
+            <b>Date of birth: </b>{{object.dob}}
+        </section>
+        <section class="mt-2">
+            <b>OWNER: </b> &nbsp;<a href="{% url 'owner-page' object.owner.id %}" class="btn btn-outline-primary btn-sm" role="button">{{object.owner.username}}</a>
+        </section>
+        
+    </div>
+  </div>
+{% endblock content %}

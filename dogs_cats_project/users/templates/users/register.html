@@ -1,0 +1,29 @@
+{% extends "frontend/base/master.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Register New Owner
+{% endblock title %}
+
+{% block content %}
+
+
+<section>
+  <form method="POST">
+    {% csrf_token %}
+    <fieldset>
+      <legend><h3>Register</h3></legend>
+      {{ form|crispy }}
+    </fieldset>
+    <div>
+      <button type="submit" class='btn btn-primary' >Sign Up</button>
+    </div>
+    <div>
+        <small>
+         already have account ? <a href="{% url 'login' %}">Sign In</a>
+        </small>
+      </div>
+  </form>
+</section>
+
+{% endblock %}

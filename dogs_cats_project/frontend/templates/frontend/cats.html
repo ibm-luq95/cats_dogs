@@ -1,0 +1,36 @@
+{% extends "frontend/base/master.html" %}
+
+{% block title %} Cats {% endblock title %}
+
+{% block content %}
+<div class="text-center">
+    <h1>List of all Cats</h1>
+  </div>
+  <hr />
+<div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        {% for cat in all_cats_pets %}
+           <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{cat.avatar.url}}" class="bd-placeholder-img card-img-top" alt="{{cat.name}}" height="250" />
+            <div class="card-body">
+              <p class="card-text">{{ cat.name }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a role="button" href="{% url 'single-page' cat.id %}" class="btn btn-sm btn-outline-secondary">View</a>
+                  <a role="button" href="{% url 'owner-page' cat.owner.id  %}" class="btn btn-sm btn-outline-secondary">{{ cat.owner.username }}</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+
+      </div>
+    </div>
+  </div>
+{% endblock content %}

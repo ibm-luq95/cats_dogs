@@ -1,0 +1,56 @@
+{% extends "frontend/base/master.html" %}
+{% load static %}
+
+{% block title %}
+    Owner Name here
+{% endblock title %}
+
+{% block content %}
+<br>
+<div class="row mt-5">
+
+    <div class="col">
+        <section class="mt-3">
+            <b>Name: </b> {{object.first_name}} {{ object.last_name }}
+        </section>
+        <section class="mt-3">
+            <b>Totla: </b> {{ object.pet_set.count }}
+        </section>
+        <section class="mt-3">
+            <b>Joined Date: </b> {{object.date_joined|date:"M d, Y"}}
+        </section>        
+    </div>
+  </div>
+  <hr>
+  <!-- List of all owner's pets  -->
+  <div class="text-center mt-5">
+      <h2>{{ object.username }}'s Pets</h2>
+  </div>
+
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+       {% for pt in object.pet_set.all %}
+         <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{pt.avatar.url}}" class="bd-placeholder-img card-img-top" alt="{{pt.name}}" height="250" />
+            <div class="card-body">
+              <p class="card-text"><a href="{% url 'single-page' pt.id %}">{{ pt.name }}</a></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a role="button" href="{% url 'single-page' pt.id %}" class="btn btn-sm btn-outline-secondary">View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

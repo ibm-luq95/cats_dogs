@@ -1,0 +1,48 @@
+{% extends "frontend/base/master.html" %}
+
+{% block content %}
+{% if not user.is_authenticated %}
+<div class="jumbotron text-center">
+  <h1>Welcome to our pet store</h1>
+  <p class="lead">To see the content or to manage the pets you should login, if new user register and welcome in our
+    store</p>
+  <a class="btn btn-lg btn-primary" href="{% url 'login' %}" role="button">Login </a>
+  <a class="btn btn-lg btn-primary" href="{% url 'register' %}" role="button">Register </a>
+</div>
+        {% else %}
+        <div class="jumbotron text-center">
+          <h1>Welcome {{ user.username }}</h1>
+          <p class="lead">What you want to do?</p>
+          <a class="btn btn-lg btn-primary" href="{% url 'dashboard-add-pet' %}" role="button">New Pet </a>
+          <a class="btn btn-lg btn-primary" href="{% url 'logout' %}" role="button">Logout </a>
+        </div>
+        {% endif %}
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        {% for pet in all_pets %}
+         <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{ pet.avatar.url }}" alt="{{ pet.name }}" class="bd-placeholder-img card-img-top " height="250" />
+            <div class="card-body">
+              <p class="card-text"><a href="{% url 'single-page' pet.id %}">{{ pet.name }}</a></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+
+                  <a role="button" href="{% url 'single-page' pet.id %}" class="btn btn-sm btn-outline-secondary">View</a>
+                  <a role="button" href="{% url 'owner-page' pet.owner.id  %}" class="btn btn-sm btn-outline-secondary">{{ pet.owner.username }}</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+
+      </div>
+    </div>
+  </div>
+{% endblock content %}
